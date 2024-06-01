@@ -530,10 +530,6 @@ As for \gls{dips}, changing the jet definition from PFlow to \gls{vr} jets is ex
   \label{fig:dl1dVRROCgrav}
 \end{figure}
 
-As shown in Table~\ref{tab:max-perf-dl1dVR}, the specifically \gls{vr}-trained \gls{dl1d} outperforms the PFlow version with the flavour fraction parameter for $b$-tagging $f^b_c$ changed from 0.018 (which is used for the PFlow model) to 0.1. For $c$-tagging, a clear gain in light-rejection comes at a cost of a lower $b$-rejection which can also be corrected by an appropriate change of the flavour fraction parameter for $c$-tagging $f^c_b$, currently set at 0.2 for both \gls{dl1d} models. As highlighted in Figure~\ref{apfig:DL1dVRscanf} of Appendix \ref{ap-DL1dVR}, displaying flavour fractions scans for $b$- and $c$-tagging, this choice of $f^c_b$ is indeed suboptimal for the 30\% \gls{wp}. \\
-
-While this physics-motivated architecture optimisation moving from an \gls{rnn}-based to a Deep Set-based track analyser improves the efficiency of the hierarchical model, a clear gain in performance is accessible through the more radical modification of the architecture that is adopted for the \gls{gn1} model. This is a classical observation in the world of machine learning: the vast amount of low-level noisy data can be better exploited by sophisticated architecture than by using a simple model fed a few highly engineered and reconstructed features, even when these are physically motivated. \gls{gn1} is not based on any physics principles. As shown in the next section, the tracks themselves contain enough of the rich physics signature required to unlock the label of the jet they compose. 
-
 \begin{table}[h]
   \begin{center}
       \begin{tabular}{C{1.5cm}|cc|cc|cc} 
@@ -559,3 +555,7 @@ While this physics-motivated architecture optimisation moving from an \gls{rnn}-
     \label{tab:max-perf-dl1dVR}
   \end{center}
 \end{table}
+
+As shown in Table~\ref{tab:max-perf-dl1dVR}, the specifically \gls{vr}-trained \gls{dl1d} outperforms the PFlow version with the flavour fraction parameter for $b$-tagging $f^b_c$ changed from 0.018 (which is used for the PFlow model) to 0.1. For $c$-tagging, a clear gain in light-rejection comes at a cost of a lower $b$-rejection which can also be corrected by an appropriate change of the flavour fraction parameter for $c$-tagging $f^c_b$, currently set at 0.2 for both \gls{dl1d} models. As highlighted in Figure~\ref{apfig:DL1dVRscanf} of Appendix \ref{ap-DL1dVR}, displaying flavour fractions scans for $b$- and $c$-tagging, this choice of $f^c_b$ is indeed suboptimal for the 30\% \gls{wp}. \\
+
+While this physics-motivated architecture optimisation moving from an \gls{rnn}-based to a Deep Set-based track analyser improves the efficiency of the hierarchical model, a clear gain in performance is accessible through the more radical modification of the architecture that is adopted for the \gls{gn1} model. This is a classical observation in the world of machine learning: the vast amount of low-level noisy data can be better exploited by sophisticated architecture than by using a simple model fed a few highly engineered and reconstructed features, even when these are physically motivated. \gls{gn1} is not based on any physics principles. As shown in the next section, the tracks themselves contain enough of the rich physics signature required to unlock the label of the jet they compose. 

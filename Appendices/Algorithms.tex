@@ -1,0 +1,54 @@
+\chapter{Machine Learning Algorithms}\label{app:MLalgo}
+\end{algorithm}
+\ChapFrame
+
+\textit{This Appendix presents pseudo-code for selected algorithms presented in Chapter \ref{Chap-ML}.}
+
+\section{Decision Trees and their extensions}
+
+\subsection{Decision Trees}
+\begin{algorithm}
+    \caption{Recursive Procedure to Train a Decision Tree \cite{MurphyML}.}
+    \begin{algorithmic}
+    \Function{fitTree}{node, $D$, depth}
+        \State $\text{node.prediction} \gets \text{mean}(\{y_i : i \in $D$\})$ 
+        \State $(j^*, t^*, D_L, D_R) \gets \text{split}(D)$
+        \If{\text{not worthSplitting}(\text{depth}, \text{cost}, $D_L$, $D_R$)}
+            \State \Return node
+        \Else
+            \State node.left $\gets$ \textsc{FitTree}(node, $D_L$, depth + 1)
+            \State node.right $\gets$ \textsc{FitTree}(node, $D_R$, depth + 1)
+            \State \Return node
+        \EndIf
+    \EndFunction
+    \end{algorithmic}
+    \label{ag:DT}
+\end{algorithm}
+
+
+
+\section{Artificial Neural Networks}\label{app:dnn_uni_approx}
+\subsection{Universal Function Approximator Theorem}
+A family of theorem established \gls{dnn} as Universal Function Approximator. The most famous such theorem states \cite{universalFuncApproxNN,HORNIK1989359}:
+
+\paragraph{Theorem:} \textit{Let $C([0, 1]^n)$ denote the set of all continuous functions $[0, 1]^n \rightarrow \mathbb{R}$ and $\sigma$ be any sigmoidal activation function. Then the finite sum $\hat{f}(x) = \sum_{i=1}^N \alpha_i \sigma(w_i^T x + b_i)$ is dense in $C([0, 1]^n)$. In other words, given any $f \in C([0, 1]^n)$ and $\epsilon > 0$, there is a sum $\hat{f}(x)$ of the above form for which \[ f(x) - \hat{f}(x)| < \epsilon \quad \forall x \in [0, 1]^n.\]}
+
+This essentially states that any well-defined function defined over the $n$-dimensional unit hypercube $[0, 1]^n$ can be approximated by an arbitrarily wide neural network. This result can be applied outside the unit hypercube by a homothetic transformation of the data space. Interestingly, similar theorems were derived for the most important activation functions commonly used in deep learning \cite{universApproximator-Relu}.
+
+\subsection{Backpropagation Algorithm}\label{app:back_pro}
+\begin{algorithm}
+    \caption{Backpropagation Algorithm}
+    \begin{algorithmic}
+    \Function{Update}{$x$, $y$, $N$, $\mathcal{L}$}
+        \State Forward step: propagate input $x$ through network $N$ to get prediction $\hat{y}$
+        \State Loss: compute the loss or reward of $N$ as $\mathcal{L}(y, \hat{y})$
+        \While{$\exists$ a layer without local gradients}
+            \State Take the right-most layer required a gradient
+            \State Take the gradient at the input of the subsequent layer
+            \State With the chain rule, propagate the gradient of the next layer to the current layer
+            \State Store the gradient at the layer
+        \EndWhile
+    \EndFunction
+    \end{algorithmic}
+    \label{ag:backpropagation}
+\end{algorithm}

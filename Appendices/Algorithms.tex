@@ -1,12 +1,11 @@
 \chapter{Machine Learning Algorithms}\label{app:MLalgo}
-\end{algorithm}
 \ChapFrame
 
-\textit{This Appendix presents pseudo-code for selected algorithms presented in Chapter \ref{Chap-ML}.}
+\textit{This Appendix presents pseudocode for selected algorithms presented in Chapter \ref{Chap-ML}.}
 
 \section{Decision Trees and their extensions}
 
-\subsection{Decision Trees}
+\subsection{Decision Trees}\label{app:dtalgo}
 \begin{algorithm}
     \caption{Recursive Procedure to Train a Decision Tree \cite{MurphyML}.}
     \begin{algorithmic}
@@ -25,6 +24,36 @@
     \label{ag:DT}
 \end{algorithm}
 
+\subsection{AdaBoost}
+\begin{algorithm}
+    \caption{Adaboost for Binary Classification with Exponential Loss \cite{MurphyML}}
+    \label{algo:adaboost}
+    \begin{algorithmic}
+    \State Initialise weights: $w_{i,1} = 1/N$, where $N$ is the number of samples.
+    \For{$m = 1$ to $M$}
+        \State Minimise $\epsilon_m = \sum_i w_{i,m} \mathbb{I}(y_i \neq f_m(x_i))$ on training set with weights $w_{i,m}$ to find $f_m(x)$.
+        \State Compute $\alpha_m = \frac{1}{2} \log\left(\frac{1 - \epsilon_m}{\epsilon_m}\right)$.
+        \State Update weights: $w_{i,m+1} \leftarrow w_{i,m} \, \exp(-\alpha_m y_i f_m(x_i))$ and renormalise $\sum_i w_{i, m+1} = 1$.
+    \EndFor
+    \State \Return $F(x) = \sum_{m=1}^M \alpha_m f_m(x)$
+    \end{algorithmic}
+\end{algorithm}
+
+\subsection{Gradient Boosting}
+\begin{algorithm}
+    \caption{Gradient Boosting \cite{MurphyML}}
+    \label{algo:gradient_boosting}
+    \begin{algorithmic}
+    \State Initialise $f_0(x) = \arg\min_\alpha \,\sum_{i=1}^N L(y_i, \alpha)$
+    \For{$m = 1$ to $M$}
+        \State Compute the gradient residuals for each $i= 1, ..., N$: $g_{i,m} = -\left[\frac{\partial L(y_i, f(x_i))}{\partial f(x_i)}\right]_{f(x_i) = f_{m-1}(x_i)}$
+        \State Train weak learner $h_m$ on the dataset $\{(x_i, g_{i,m})\}_{i=1}^N$
+        \State Compute $\alpha_m$ by minimising $\sum_{i=1}^N L(y_i, f_{m-1}(x_i) + \alpha h_m(x_i))$
+        \State Update $f_m(x) = f_{m-1}(x) + LR \times \alpha_m h_m(x)$
+    \EndFor
+    \State \Return $f(x) = f_M(x)$
+    \end{algorithmic}
+\end{algorithm}
 
 
 \section{Artificial Neural Networks}\label{app:dnn_uni_approx}
@@ -51,4 +80,34 @@ This essentially states that any well-defined function defined over the $n$-dime
     \EndFunction
     \end{algorithmic}
     \label{ag:backpropagation}
+\end{algorithm}
+
+
+
+\subsection{General Graph Update}\label{app:graph_update}
+\begin{algorithm}
+    \caption{Steps of Computation in a Full Graph Network Block \cite{graphInductiveBias}}
+    \label{algo:graph_network}
+    \begin{algorithmic}
+    \Function{GraphNetworkUpdate}{$E, V, u$}
+        \For{$k \in \{1 \ldots N^e\}$}
+            \State $e^*_k \gets \phi^e(e_k, v_{r_k}, v_{s_k}, u)$
+        \EndFor
+
+        \For{$i \in \{1 \ldots N^n\}$}
+            \State Let $E_i^* = \{(e^*_k, r_k, s_k)\}$ for $k = 1 : N^e$ where $r_k = i$
+            \State $\overline{e^*_i} \gets \rho^{e \to v}(E^*_i)$
+            \State $v^*_i \gets \phi^v(\overline{e^*_i}, v_i, u)$
+        \EndFor
+
+        \State Let $V^* = \{v^*\}_{i=1}^{N^v}$
+        \State Let $E^* = \{(e^*_k, r_k, s_k)\}_{k=1}^{N^e}$
+        \State $\overline{e^*} \gets \rho_{e \to u}(E^*)$
+        \State $\overline{v^*} \gets \rho_{v \to u}(V^*)$
+        \State $u^* \gets \phi_u(\overline{e^*}, \overline{v^*}, u)$
+
+        \State \Return $(E^*, V^*, u^*)$
+    \EndFunction
+    \end{algorithmic}
+    \label{ag:algorithmic}
 \end{algorithm}

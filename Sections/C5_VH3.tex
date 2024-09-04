@@ -1,11 +1,10 @@
 \section{Discriminant Variables}\label{sec-vh-disc}
-The analysis leverages a varied set of reconstructed variables in the fit to constrain the different processes and control mismodelling effects. Figure \ref{fig:variablesControlReg} displays the chosen variable used for each region in the fit in the resolved regime. The reconstructed Higgs mass offers some separation power of the signals from their major backgrounds, hence some control regions such as the Top $BT$ \glspl{cr} and CRHighs are based on the relevant distributions $m_{bb}$, $m_{cc}$, or $m_J$, depending on the targeted decay and the regime. Some \glspl{cr} passed to the fit are modelled with the $p_T^V$ distribution, such as the CRHighs in the 2L-channel $NT$ and $BB$ tagged-regions and the $V+l$ \gls{cr} ($LN$-tag). Directly fitting this distribution helps constrain a Monte Carlo mismodelling in the \ptv\ distributions of the \textsc{Sherpa} 2.2.11 $V+$jets samples, as detailed in Section \ref{sec-mod}. To optimise signal and background separation in the statistical analysis, dedicated \glspl{bdt}, also called \glspl{mva}, are trained for the signal regions of the combined analysis with the \textsc{TMVA} \textsc{Root} software \cite{Therhaag:2011jh}. Simple one-dimensional discriminants are built from the outputs of fine-tuned \glspl{bdt} trained on specific sets of event-level input variables, as described in this section.
+The analysis leverages a varied set of reconstructed kinematic variables in the fit to constrain the different processes and control mismodelling effects. Figure \ref{fig:variablesControlReg} displays the chosen variable used for each region in the fit in the resolved regime. The reconstructed Higgs mass offers some separation power to distinguish the signals from their major backgrounds, hence some control regions such as the Top $BT$ \glspl{cr} and CRHighs are based on the relevant distributions $m_{bb}$, $m_{cc}$, or $m_J$, depending on the targeted decay and the regime. Some \glspl{cr} passed to the fit are modelled with the $p_T^V$ distribution, such as the CRHighs in the 2L-channel $NT$ and $BB$ tagged-regions and the $V+l$ \gls{cr} ($LN$-tag). Directly fitting this distribution helps constrain a Monte Carlo mismodelling in the \ptv\ distributions of the \textsc{Sherpa} 2.2.11 $V+$jets samples, as detailed in Section \ref{sec-mod}. To optimise signal and background separation in the statistical analysis, dedicated \glspl{bdt}, also called \glspl{mva}, are trained for the signal regions of the combined analysis with the \textsc{TMVA} \textsc{Root} software \cite{Therhaag:2011jh}. Simple one-dimensional discriminants are built from the outputs of fine-tuned \glspl{bdt} trained on specific sets of event-level input variables, as described in this section.
 
 \begin{figure}[h!]
-  %\hspace{-2.0cm}
   \center
   \includegraphics[width=0.98\textwidth]{Images/VH/Discriminants/Variables.pdf}
-  \caption{Illustration of the discriminant variables used per control regions of the resolved regime in the fit. Norm-only indicates a region to extract a global normalisation and not binned by a variable.} % Maybe re-do it yourself ...
+  \caption{Illustration of the discriminant variables used per control regions of the resolved regime in the fit. \textit{Norm-only} indicates a region included to extract a global normalisation, hence not binned by a variable.}
   \label{fig:variablesControlReg}
 \end{figure}
 
@@ -21,12 +20,12 @@ The wide adoption of \gls{bdt}-discriminants in all regimes of the analysis mark
       \item \textbf{2L}: \glspl{bdt} are trained for the 2- and $\geq$3-jet categories in \ptv\ $\in [75, 150]$ GeV and \ptv\ $\geq 150$ GeV.
   \end{itemize}
   The low \ptv\ bin is separated from the higher \ptv\ $>$ 150 GeV due to its large statistics and different background compositions.
-  \item \textbf{Boosted \boldvhbc:} a \gls{bdt} is trained per lepton channel in an inclusive bin of \ptv.
+  \item \textbf{Boosted \boldvhbc:} a \gls{bdt} is trained per lepton channel in an inclusive bin of \ptv\ $>400$ GeV.
 \end{itemize}
 
-For training, the full \gls{mc} samples statistics is leveraged thanks to the so-called \textit{GNN truth tagging}. Instead of filtering down the simulated samples by cutting away events failing to pass the flavour tagging requirements, the standard application of the selection called \textit{direct tagging}, this technique applies a per event weight representing its probability of passing the tagging selection. The result is a weighted distribution possessing the statistical precision of the full \gls{mc}-samples but distributed per the direct tagging scheme. The weights in this truth tagging procedure are predicted by graph neural networks passed event-level information, as detailed in Appendix \ref{app-truth-tagging}. The truth tagging procedure is applied separately to $BB$, $TT$, $TL$, and $NT$ events. \\
+For training, the full \gls{mc} samples statistics is leveraged thanks to the so-called \textit{GNN truth tagging}. Instead of filtering down the simulated samples by cutting away events failing to pass the flavour tagging requirements, as done by the standard application of the selection called \textit{direct tagging}, this technique applies a per event weight representing its probability of passing the tagging selection. The result is a weighted distribution possessing the statistical precision of the full \gls{mc}-samples but distributed as the direct tagging scheme. The weights in this truth tagging procedure are predicted by graph neural networks passed event-level information, as detailed in Appendix \ref{app-truth-tagging}. The truth tagging procedure is applied separately to $BB$, $TT$, $TL$, and $NT$ events. \\
 
-The \glspl{bdt} are trained with specific sets of features defined per lepton channel, as listed in Table \ref{tbl:MVAVars} with prcise variable definitions given in Appendix \ref{ap-MVA}. Features with long tails are clipped to contain 99\% of the centred distributions. Variables undefined for an event are given a default values. The sets of features used are the result of hyperparameter optimisation campaigns, with other variables tested but eventually not included due to their negligible impact on the performance. 
+The \glspl{bdt} are trained with specific sets of features defined per lepton channel, as listed in Table \ref{tbl:MVAVars} with prcise variable definitions given in Appendix \ref{ap-MVA}. Features with long tails are clipped to contain 99\% of the centred distributions. Variables undefined for an event are given a default values. The sets of features used are the result of hyperparameter optimisation studies, with other variables tested but eventually not included due to their negligible impact on the performance. 
 
 \input{Tables/VH/MVAInputs.tex}
 
@@ -34,7 +33,7 @@ The \glspl{bdt} are trained with specific sets of features defined per lepton ch
 
 \input{Tables/VH/MVAhyperP.tex}
 
-Trainings are performed with the $k$-fold method, setting $k = 2$, to use the full statistics while assessing the overtraining risk. Each \gls{bdt} is therefore doubly trained, once on odd events and once on even events. The performance is assessed on the held-out fold and the final discriminant is the combination of the odd- and even-trained \glspl{bdt}. Additional overtraining checks are performed on each fold comparing the trained distribution to a test distribution obtained by applying the \gls{bdt} on the held-out fold, as presented in Figure~\ref{fig:overtrainingCheck}. The \glspl{bdt} deliver a good discrimination performance, with a typical \gls{auc} of the \gls{roc} of $\sim 0.9$ and a large increase on the expected statistical significance of the analysis compared to using the Higgs candidate mass as discriminating variables. \\
+Trainings are performed with the $k$-fold method, setting $k = 2$, to use the full statistics while assessing the overtraining risk. Each \gls{bdt} is therefore doubly trained, once on odd events and once on even events. The performance is assessed on the held-out fold and the final discriminant is the combination of the odd- and even-trained \glspl{bdt}. Additional overtraining checks are performed on each fold comparing the trained distribution to a test distribution obtained by applying the \gls{bdt} on the held-out fold, as presented in Figure~\ref{fig:overtrainingCheck}. The good agreement between the training and test \gls{bdt} distributions indicate no overtraining occured. The \glspl{bdt} deliver a good discrimination performance, with a typical \gls{auc} of the \gls{roc} of $\sim 0.9$ and a large increase on the expected statistical significance of the analysis compared to using the Higgs candidate mass as discriminating variables. \\
 
 \begin{figure}[h!]
   \hspace{-0.3cm}
@@ -48,7 +47,7 @@ Trainings are performed with the $k$-fold method, setting $k = 2$, to use the fu
     \includegraphics[width=\textwidth]{Images/VH/Discriminants/0Lcc.png}
     \caption{2 $c$-tagged model, test AUC = 0.898.}
   \end{subfigure}
-  \caption{Overtraining checks for the BDTs trained for the resolved \vhb\ (left) and \vhc\ (right) in the 0L 2-jet region with \ptv\ $\geq$ 150 GeV. The binned histograms are the training data (blue) and background (purple) distributions, while the data points are the equivalent test distributions - the bottom plots show the ratio of test/train.}
+  \caption{Overtraining checks for the BDTs trained for the resolved \vhb\ (left) and \vhc\ (right) in the 0L 2-jet region with \ptv\ $\geq$ 150 GeV. The binned histograms are the training data (blue) and background (purple) \gls{bdt} distributions, while the data points are the equivalent for the test sets - the bottom plots show the ratio of test/train.}
   \label{fig:overtrainingCheck}
 \end{figure}
 
@@ -62,6 +61,7 @@ The \glspl{bdt} outputs from the previous section are a finely-binned \gls{mva} 
 \end{equation} 
 where $N_s$ ($N_b$) is the total number of signal (background) events, $n_s$ ($n_b$) the number of signal (background) events in a specific bin, and $z_s$ and $z_b$ are tunable parameters indirectly controlling the number of signal and background bins desired in the region. For a given choice of $z_s$ and $z_b$, the algorithm starts from the initial binning of the \glspl{bdt} and successively recombines bins from the higher bin values (right) to the lower values (left). Successive bins of the original distribution are merged until the combined bin reaches a score $Z > 1$, thanks to increases in $n_s$ and $n_b$. Once a combined bin reaches the desired scores, it is removed from consideration and the algorithm starts again from the highest bin not yet recombined.\\
 
+\begin{comment}
 \begin{table}[h!]
   \resizebox{\textwidth}{!}{
   \begin{tabular}{c|c|c|c|c|c|c}
@@ -87,6 +87,45 @@ where $N_s$ ($N_b$) is the total number of signal (background) events, $n_s$ ($n
                         \end{cases}
     \end{cases}$
       & \multicolumn{3}{l}{
+        $\begin{cases} \text{$TT$: } z_s = 2, z_b = 2 \\ %250L400
+                        \text{$LT$/$XT$: } z_s = 5,\ z_b = 3 \\
+                        \text{Else: } z_s = 10,\ z_b = 5
+        \end{cases}$
+      }
+    \\\hline \hline
+  \end{tabular}
+  }
+  \caption{The optimised tune of the $z_s$ and $z_b$ parameter to rebin the MVAs with the \textit{Transformation D} algorithm in different phase spaces of the combined analysis.}
+  \label{tab:trafoDParams}
+\end{table}
+\end{comment}
+
+
+\begin{table}[h!]
+  \resizebox{\textwidth}{!}{
+  \begin{tabular}{c|c|c|c|c|c}
+    \hline\hline
+    %& $75 < p_T^V <150~\text{GeV}$ & $150 < p_T^V <250~\text{GeV}$ & $250 < p_T^V <400~\text{GeV}$ & $400 < p_T^V <600~\text{GeV}$ & \multicolumn{1}{c}{$p_T^V >600~\text{GeV}$}\\ \hline
+    \ptv\ & $[75, 150]$ GeV & $[150, 250]$ GeV & $[250, 600]$ GeV & \multicolumn{1}{c}{$p_T^V >600~\text{GeV}$}\\ \hline
+    \vhb\ & \multicolumn{2}{c|}{$z_s = 10,\ z_b = 5$} & $z_s=5,\ z_b=3$ & \multicolumn{1}{c}{$\begin{cases} \text{0L/1L: } z_s = 3, z_b = 2 \\ \text{2L: }z_s = 2, z_b = 2\end{cases}$}\\\hline
+   \vhc\ & 
+   $\begin{cases} % 75-150
+      \text{$TT$: } z_s = 5, z_b = 3 \\
+      \text{Else: } z_s = 10,\ z_b = 5
+    \end{cases}$ & 
+    
+    $\begin{cases} % 150L250
+      \text{0L/1L} & \begin{cases} 
+                            \text{$TT$: } z_s = 5, z_b = 3 \\
+                            \text{Else: } z_s = 10,\ z_b = 5
+                          \end{cases}\\
+      \text{2L} & \begin{cases}
+                          \text{$TT$: } z_s = 2,\ z_b = 2\\
+                          \text{$LT$/$XT$: } z_s = 5,\ z_b = 5\\
+                          \text{Else: } z_s = 10,\ z_b = 5
+                        \end{cases}
+    \end{cases}$
+      & \multicolumn{2}{l}{
         $\begin{cases} \text{$TT$: } z_s = 2, z_b = 2 \\ %250L400
                         \text{$LT$/$XT$: } z_s = 5,\ z_b = 3 \\
                         \text{Else: } z_s = 10,\ z_b = 5

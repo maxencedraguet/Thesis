@@ -19,7 +19,7 @@
  
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
 \center 
-\vspace*{4cm}
+\vspace*{2cm}
 \textsc{\LARGE \color{white} University of Oxford}\\
 \textsc{\large \color{white} Lincoln College}\\[1cm]
 \textit{\large \color{white} Thesis submitted for the degree of} \\
@@ -28,7 +28,11 @@
 %{\LARGE \bfseries \color{white} DPhil Thesis\\[0.7cm]} 
 %{\color{white} \HRule \\ \HRule} \\[0.4cm]
 %{\color{white} \HRule } \\[0.4cm]
-\textsc{\huge \bfseries \color{white} advanced machine learning algorithms for heavy flavour jets identification and higgs boson searches with the atlas experiment}\\[0.4cm] 
+\begin{center}
+\textsc{\huge \bfseries \color{white} advanced machine learning algorithms \\for heavy flavour jets identification}\\
+{\huge \bfseries \color{white} \&}\\
+\textsc{\huge \bfseries \color{white} study of the higgs boson couplings to the charm and beauty quarks with the atlas experiment}\\[1cm] 
+\end{center}
 %\textsc{\huge \bfseries \color{white} Advanced Machine Learning Applications for Higgs Searches and Heavy Flavour Quarks Identification at ATLAS}\\[0.4cm] 
 %{\color{white} \HRule \\ \HRule}\\[2cm]
 %{\color{white} \HRule }\\
@@ -63,7 +67,7 @@
 \vspace*{\fill}
 \begin{center}
 \hspace{-1cm}
-\textsc{\color{silver} ARTISTIC REPRESENTATION OF THE HIGGS POTENTIAL BY CERN \cite{Dominguez:2815837}}
+\textsc{\color{silver} ARTISTIC REPRESENTATION OF THE HIGGS POTENTIAL \cite{Dominguez:2815837}}
 \end{center}
 \endgroup
 \end{titlepage}
@@ -128,8 +132,8 @@
 
 {\pagestyle{plain}
 \begin{singlespace}
-\setcounter{chapter}{8}
-\ChapFrame
+%\setcounter{chapter}{8}
+%\ChapFrame
 \addcontentsline{toc}{chapter}{Bibliography}
 \printbibliography
 
@@ -137,6 +141,8 @@
 
 \newpage
 \begin{appendices}
+\input{Appendices/Algorithms.tex}
+\newpage
 \input{Appendices/A_FTAG.tex}
 \newpage
 \input{Appendices/B_VH.tex}

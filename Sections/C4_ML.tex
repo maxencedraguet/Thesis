@@ -386,14 +386,14 @@ A \gls{gnn} architecture consists of multiple layers of message-passing operatio
 \end{enumerate}
 
 The most general graph algorithm describing an update stage of a full \gls{gnn} block is presented in Algorithm \ref{algo:graph_network} of Appendix \ref{app:graph_update}. Essentially, for a given step the input is a graph $G(E, V, u)$ that is updated into a new graph $G^*(E^*, V^*, u^*)$ by first updating the edges $e \in E$, then modifying the nodes $v \in V$, and finally the global representation $u$. The update rule leverages different neural networks $\phi$ and aggregation functions $\rho$. The aggregation function must accept a variable number of inputs with permutation invariance to output a single element per group, and is typically implemented with the \textit{sum} or \textit{max pooling}. A global update is decomposed into the following successive steps: 
-\begin{itemize}
+\begin{enumerate}
     \item Update the edges with a \gls{dnn} $\phi^e$ mapping each of the input edges, their respective receiver and sender nodes, and the global state $u$ to output a new edge feature vector $e^*_k$ for each edge $k$: $e^*_k = \phi^e(e_k, v_{r_k}, v_{s_k}, u)$. The new edges are stored in a set $E^*$. 
     \item Before updating a vertex $i$ represented by $v_i$, the $E_i^*$ updated edges connecting to $i$ are pooled locally over the node as $\overline{e^*_i} = \rho^{e \rightarrow v}(E_i^*)$.
     \item The vertex is then updated with a \gls{dnn} $\phi^v$ mapping the pooled representation of the edges $\overline{e^*_i}$ connected to the vertex being updated, the input vertex feature $v_i$, and the global representation $u$ to update $v_i \rightarrow v^*_i = \phi^v(\overline{e^*_i}, v_i, u)$. The new vertices are stored in $V^*$.
     \item The set of edges is updated through global pooling $\overline{e^*} = \rho^{e \rightarrow u}(E^*)$.
     \item The set of vertices is updated through global pooling $\overline{v^*} = \rho^{v \rightarrow u}(V^*)$.
     \item The global representation is updated by a \gls{dnn} $\phi^u$ mapping $u^* = \phi^u(\overline{e^*}, \overline{v^*}, u)$, with the globally pooled updated edges ($\overline{e^*}$) and vertices ($\overline{v^*}$). 
-\end{itemize} 
+\end{enumerate} 
 This formulation of a graph as a message-passing device with edge updates is the most complete architecture of a \gls{gnn}. However, the design is flexible: for example, \glspl{rnn} or \glspl{cnn} can be used instead of \glspl{dnn}. Furthermore, many specialisations of the structures exist to reduce the complexity of the model and avoid overfitting or convergence issues, as listed in Figure~\ref{fig:diverseGNN}. A notable example for this thesis is the \textit{Deep Set} architecture \cite{NIPS2017f22e4747}, designed to run specifically on sets where the ordering does not matter. It essentially simplifies the graph network by dropping altogether the edges and considering instead a fully connected graph with static edges, with an update of the global representation only based on pooled node information: 
 \[v^*_i = \phi^v(\overline{e^*_i}, v_i, u) = \phi^v(v_i, u),\] 
 \[\overline{V^*} = \rho^{v \rightarrow u} = \sum_i v^*_i,\] 

@@ -1,39 +1,41 @@
 \section{Discriminant Variables}\label{sec-vh-disc}
-The analysis leverages a varied set of reconstructed kinematic variables in the fit to constrain the different processes and control mismodelling effects. Figure \ref{fig:variablesControlReg} displays the chosen variable used for each region in the fit in the resolved regime. The reconstructed Higgs mass offers some separation power to distinguish the signals from their major backgrounds, hence some control regions such as the Top $BT$ \glspl{cr} and CRHighs are based on the relevant distributions $m_{bb}$, $m_{cc}$, or $m_J$, depending on the targeted decay and the regime. Some \glspl{cr} passed to the fit are modelled with the $p_T^V$ distribution, such as the CRHighs in the 2L-channel $NT$ and $BB$ tagged-regions and the $V+l$ \gls{cr} ($LN$-tag). Directly fitting this distribution helps constrain a Monte Carlo mismodelling in the \ptv\ distributions of the \textsc{Sherpa} 2.2.11 $V+$jets samples, as detailed in Section \ref{sec-mod}. To optimise signal and background separation in the statistical analysis, dedicated \glspl{bdt}, also called \glspl{mva}, are trained for the signal regions of the combined analysis with the \textsc{TMVA} \textsc{Root} software \cite{Therhaag:2011jh}. Simple one-dimensional discriminants are built from the outputs of fine-tuned \glspl{bdt} trained on specific sets of event-level input variables, as described in this section.
+The analysis leverages a varied set of reconstructed kinematic variables in the fit to constrain the different processes and control mismodelling effects. Figure \ref{fig:variablesControlReg} displays the chosen variable used for each region in the fit in the resolved regime. The reconstructed Higgs mass offers some separation power to distinguish the signals from their major backgrounds, hence some control regions such as the top $BT$ \glspl{cr} and CRHighs are based on the relevant distributions $m_{bb}$, $m_{cc}$, or $m_J$, depending on the targeted decay and the regime. Some control regions passed to the fit are modelled with the $p_T^V$ distribution, such as the CRHighs in the 2L-channel $NT$ and $BB$ tagged-regions and the $V+l$ \gls{cr} ($LN$-tag). Directly fitting this distribution helps constrain an observed Monte Carlo mismodelling in the \ptv\ distributions of the \textsc{Sherpa} 2.2.11 $V+$jets samples, as detailed in Section \ref{sec-mod}. To optimise the signal and background separation in the statistical analysis, dedicated \glsreset{bdt}\glspl{bdt}, also called \glsreset{mva}\glspl{mva}, are trained for the signal regions of the combined analysis with the \textsc{TMVA} \textsc{Root} software \cite{Therhaag:2011jh}. Simple one-dimensional discriminants are built from the outputs of fine-tuned \glspl{bdt} trained on specific sets of event-level input variables, as described in detail in this section.
+
+\subsection{Multivariate Analysis}
+Three sets of \glspl{mva} discriminants are trained for the analysis: \textit{\gls{bdt}} discriminants for the signal region modelling, a specific set \textit{mvaCRLow} for the CRLow distribution in the resolved \vhb, and a set of \glspl{bdt} for the diboson cross-check analysis. For the last one, the signal is set to the diboson process decaying into the expected pair of jets $VZ(\rightarrow b\bar{b})$ or $VZ(\rightarrow c\bar{c})$, and the non-diboson processes as well as the $VH$ processes are considered as backgrounds. All multivariate discriminants predict a continuous score in the range $[-1, 1]$, with higher values indicative of a signal-like nature and lower values background-like. The wide adoption of \gls{bdt}-discriminants in all the regimes of the analysis marks a significant improvement over the standalone \vhc\ and boosted \vhb\ analyses, generalising the successful approach first introduced in the resolved \vhb\ \cite{ATLAS:2020fcp}.\\
 
 \begin{figure}[h!]
   \center
   \includegraphics[width=0.98\textwidth]{Images/VH/Discriminants/Variables.pdf}
-  \caption{Illustration of the discriminant variables used per control regions of the resolved regime in the fit. \textit{Norm-only} indicates a region included to extract a global normalisation, hence not binned by a variable.}
+  \caption{Illustration of the discriminant variables used per control regions of the resolved regime in the statistical analysis. \textit{Norm-only} indicates a region included to extract a global normalisation, hence not binned by a variable.}
   \label{fig:variablesControlReg}
 \end{figure}
 
-\subsection{Multivariate Analysis}
-Three sets of discriminants are trained for the analysis: \textit{\gls{mva}} discriminants for the signal region modelling, a specific set \textit{mvaCRLow} for the CRLow distribution in the resolved \vhb, and a set of \glspl{bdt} for the diboson cross-check analysis. For the last one, the signal is set to the diboson process decaying into the expected pair of jets $VZ(\rightarrow b\bar{b})$ or $VZ(\rightarrow c\bar{c})$, and the non-diboson processes as well as the $VH$ processes are set as backgrounds. All multivariate discriminants predict a continuous score in the range $[-1, 1]$, with higher values indicating a signal-like component and lower values background-like.\\
-
-The wide adoption of \gls{bdt}-discriminants in all regimes of the analysis marks a significant improvement over the standalone \vhc\ and boosted \vhb\ analyses, generalising the successful approach first introduced in the resolved \vhb\ \cite{ATLAS:2020fcp}. Before training, the object and event selections of Section \ref{sec-selectionandcat} and the jet energy corrections of Section \ref{sec-vh-jetcor} are applied. To limit the number of training runs and the risk of overtraining from the low statistics of some kinematic regions, the \glspl{bdt} are trained on inclusive regions combining the \glspl{sr} and the $\Delta R$-based \glspl{cr}. The \glspl{bdt} are trained to discriminate the respective signal of the different targeted decays \footnote{The \vhb\ samples for the $BB$-tagged events and \vhc\ samples for the $c$-tagged events.} from background samples, including $V+$jets, \ttb, single-top, and diboson. \glspl{bdt} are specifically trained in the following categories, covering the fine analysis categorisation to guarantee sufficient statistics and avoid overtraining:
+Before training, the object and event selections of Section \ref{sec-selectionandcat} and the jet energy corrections of Section \ref{sec-vh-jetcor} are applied. To limit the number of training runs and the risk of overtraining from the low statistics of some kinematic regions, the \glspl{bdt} are trained on inclusive regions combining the \glspl{sr} and the $\Delta R$-based \glspl{cr}. The \glspl{bdt} are trained to discriminate the respective signal of the different targeted decays\footnote{The \vhb\ samples for the $BB$-tagged events and \vhc\ samples for the $c$-tagged events.} from background samples, including $V+$jets, \ttb, single-top, and diboson. \glspl{bdt} are specifically trained in the following categories, covering the fine analysis categorisation to guarantee sufficient statistics and avoid overtraining:
 \begin{itemize}[leftmargin=*]
-  \item \textbf{Resolved \boldvhbc:} \glspl{bdt} are trained separately for the $BB$-, 2 $c$-, and 1 $c$-tags. Separate trainings are run for each lepton channel and for the following jet multiplicities and \ptv\ bins.
+  \item \textbf{Resolved \boldvhbc:} \glspl{bdt} are trained separately for the $BB$tagged, 2 $c$-tagged, and 1 $c$-tagged events. Individual trainings are run for each lepton channel and for the following jet multiplicities and \ptv\ bins.
   \begin{itemize}
-      \item \textbf{0L}: \glspl{bdt} are trained for the 2-, 3-, and 4-jet categories, in an inclusive \ptv\ $\geq 150$ GeV region.
-      \item \textbf{1L}: \glspl{bdt} are trained for the 2- and 3-jet categories, in \ptv\ $\in [75, 150]$ GeV and \ptv\ $\geq 150$ GeV.
-      \item \textbf{2L}: \glspl{bdt} are trained for the 2- and $\geq$3-jet categories in \ptv\ $\in [75, 150]$ GeV and \ptv\ $\geq 150$ GeV.
+      \item \textbf{0L}: \glspl{bdt} are trained for the 2-, 3-, and 4-jet categories, each in an inclusive \ptv\ $\geq 150$ GeV region.
+      \item \textbf{1L}: \glspl{bdt} are trained for the 2- and 3-jet categories, in the \ptv\ $\in [75, 150]$ GeV and \ptv\ $\geq 150$ GeV \ptv\ regions.
+      \item \textbf{2L}: \glspl{bdt} are trained for the 2- and $\geq$3-jet categories, in the \ptv\ $\in [75, 150]$ GeV and \ptv\ $\geq 150$ GeV \ptv\ regions.
   \end{itemize}
   The low \ptv\ bin is separated from the higher \ptv\ $>$ 150 GeV due to its large statistics and different background compositions.
-  \item \textbf{Boosted \boldvhbc:} a \gls{bdt} is trained per lepton channel in an inclusive bin of \ptv\ $>400$ GeV.
+  \item \textbf{Boosted \boldvhbc:} a \gls{bdt} is trained per lepton channel, each in a single inclusive bin of \ptv\ $>400$ GeV.
 \end{itemize}
 
-For training, the full \gls{mc} samples statistics is leveraged thanks to the so-called \textit{GNN truth tagging}. Instead of filtering down the simulated samples by cutting away events failing to pass the flavour tagging requirements, as done by the standard application of the selection called \textit{direct tagging}, this technique applies a per event weight representing its probability of passing the tagging selection. The result is a weighted distribution possessing the statistical precision of the full \gls{mc}-samples but distributed as the direct tagging scheme. The weights in this truth tagging procedure are predicted by graph neural networks passed event-level information, as detailed in Appendix \ref{app-truth-tagging}. The truth tagging procedure is applied separately to $BB$, $TT$, $TL$, and $NT$ events. \\
+For training, the full \gls{mc} samples statistics is leveraged thanks to the so-called \textit{GNN truth tagging} technique. Instead of filtering down the simulated samples by cutting away events failing to pass the flavour tagging requirements, as is done by the standard selection called \textit{direct tagging}, this technique applies a weight per event representing its probability of passing the tagging selection. The result is a weighted distribution possessing the statistical precision of the full \gls{mc} samples but distributed as the direct tagging scheme. The truth tagging weights are predicted by dedicated graph neural networks using event-level information, as detailed in Appendix \ref{app-truth-tagging}. The truth tagging procedure is applied separately to $BB$, $TT$, $TL$, and $NT$ events. \\
 
-The \glspl{bdt} are trained with specific sets of features defined per lepton channel, as listed in Table \ref{tbl:MVAVars} with prcise variable definitions given in Appendix \ref{ap-MVA}. Features with long tails are clipped to contain 99\% of the centred distributions. Variables undefined for an event are given a default values. The sets of features used are the result of hyperparameter optimisation studies, with other variables tested but eventually not included due to their negligible impact on the performance. 
+Each \gls{bdt} is trained with a specific set of features depending on the lepton channel, as listed in Table \ref{tbl:MVAVars} and detailed in Appendix \ref{ap-MVA}. Features with long tails are clipped to contain 99\% of the centred distributions. The chosen sets of features are the result of hyperparameter optimisation studies, with other variables tested but eventually not included due to their negligible impact on the performance. The architecture of the different \glspl{bdt} is also optimised, with the gradient boosting technique of Section \ref{sec-gradient-boost} deployed in the resolved regime to improve performance and capture effects outside the bulk of the distributions. In the boosted regime, due to the lower statistics available and large tails in the distributions, the AdaBoost method introduced in Section \ref{sub-adaboosted} is adopted to help stabilise the training \cite{Adaboost}. Tables \ref{tbl:MVAHyperparams} and \ref{tbl:MVAHyperparams-VHcc} list the architectures used for the \vhb\ and \vhc\ \glspl{bdt}, respectively, with the main and diboson \glspl{bdt} sharing the same hyperparameters. For \vhc, the hyperparameters are further tuned to avoid overtraining from the smaller available statistics in the 2L channel and the diboson cross-check. \\
 
+Trainings are performed with the $k$-fold method, setting $k = 2$, to use the full statistics while assessing the overtraining risk. Each \gls{bdt} is therefore trained twice, once on odd events and once on even events. The performance is assessed on the held-out fold and the final discriminant is the combination of the odd- and even-trained \glspl{bdt}. Additional overtraining checks are performed on each fold comparing the trained distribution to a test distribution obtained by applying the \gls{bdt} on the held-out fold, as presented in Figure~\ref{fig:overtrainingCheck}. The good agreement between the training and test \gls{bdt} distributions indicate no overtraining occured. The \glspl{bdt} deliver a good discrimination performance, with a typical \gls{auc} of the \gls{roc} of $\sim 0.9$ and a large increase on the expected statistical significance of the analysis compared to using the Higgs candidate mass as discriminating variable. \\
+
+\newpage
+\vspace*{\fill}
 \input{Tables/VH/MVAInputs.tex}
-
-\paragraph{}The architecture of the different \glspl{bdt} is optimised, with the gradient boosting technique of Section \ref{sec-gradient-boost} deployed in the resolved regime to improve performance and to capture effects outside the bulk of the distributions. In the boosted regime, due to the lower statistics available and large tails in the distributions, the AdaBoost method introduced in Section \ref{sub-adaboosted} is adopted to help stabilise the training \cite{Adaboost}. Tables \ref{tbl:MVAHyperparams} and \ref{tbl:MVAHyperparams-VHcc} list the architectures used for the \vhb\ and \vhc\ \glspl{bdt} respectively, with the main and diboson \glspl{bdt} sharing the same hyperparameters. For \vhc, the hyperparameters are further tuned to avoid overtraining from the smaller available statistics in the 2L channel and the diboson cross-check.
-
+\vspace*{\fill}
+\newpage
+\vspace*{\fill}
 \input{Tables/VH/MVAhyperP.tex}
-
-Trainings are performed with the $k$-fold method, setting $k = 2$, to use the full statistics while assessing the overtraining risk. Each \gls{bdt} is therefore doubly trained, once on odd events and once on even events. The performance is assessed on the held-out fold and the final discriminant is the combination of the odd- and even-trained \glspl{bdt}. Additional overtraining checks are performed on each fold comparing the trained distribution to a test distribution obtained by applying the \gls{bdt} on the held-out fold, as presented in Figure~\ref{fig:overtrainingCheck}. The good agreement between the training and test \gls{bdt} distributions indicate no overtraining occured. The \glspl{bdt} deliver a good discrimination performance, with a typical \gls{auc} of the \gls{roc} of $\sim 0.9$ and a large increase on the expected statistical significance of the analysis compared to using the Higgs candidate mass as discriminating variables. \\
 
 \begin{figure}[h!]
   \hspace{-0.3cm}
@@ -47,60 +49,20 @@ Trainings are performed with the $k$-fold method, setting $k = 2$, to use the fu
     \includegraphics[width=\textwidth]{Images/VH/Discriminants/0Lcc.png}
     \caption{2 $c$-tagged model, test AUC = 0.898.}
   \end{subfigure}
-  \caption{Overtraining checks for the BDTs trained for the resolved \vhb\ (left) and \vhc\ (right) in the 0L 2-jet region with \ptv\ $\geq$ 150 GeV. The binned histograms are the training data (blue) and background (purple) \gls{bdt} distributions, while the data points are the equivalent for the test sets - the bottom plots show the ratio of test/train.}
+  \caption{Overtraining checks for the BDTs trained for the resolved \vhb\ (left) and \vhc\ (right) in the 0L 2-jet region with \ptv\ $\geq$ 150 GeV. The binned histograms are the training data (blue) and background (purple) \gls{bdt} distributions, while the data points are the equivalent for the test sets. The bottom pannels show the ratio of test/train.}
   \label{fig:overtrainingCheck}
 \end{figure}
-
+\vspace*{\fill}
 \newpage
-In addition to the signal and cross-checks \glspl{mva}, additional \glspl{mva} are trained for the \vhb\ resolved 1L channel in the \lowdr\ \gls{cr}. This region is dedicated to the $W+$jets process, with a rich contribution of the important $W+bb$ background. At low \ptv, there is unfortunately also a large contribution from \ttb, reducing the purity of the $W+bb$ in the \gls{cr}. To recover a higher sensitivity to this background, \glspl{mva} are specially trained to discriminate the $W+bb$ process from other backgrounds in the CRLow events. They are trained with 2-fold on truth tagged samples, separately for the \ptv\ $< 150$ GeV and \ptv\ $> 150$ GeV and in a single inclusive jet multiplicity bin combining the 2- and 3-jet categories. The typical \gls{auc} of these discriminants is $\sim0.84$, with no overtraining observed.
+
+In addition to the signal and cross-checks \glspl{mva}, additional \glspl{mva} are trained for the \vhb\ resolved 1L channel in the \lowdr\ \gls{cr}. This region is dedicated to the $W+$jets process, with a rich contribution of the important $W+bb$ background. At low \ptv, there is unfortunately also a large contribution from \ttb, reducing the purity of the $W+bb$ in this \gls{cr}. To recover a higher sensitivity to the $W+$jets background, \glspl{mva} are specially trained to discriminate the $W+bb$ process from other backgrounds in the CRLow events. They are trained with 2-fold on truth tagged samples, separately for the \ptv\ $< 150$ GeV and \ptv\ $> 150$ GeV, in a single inclusive jet multiplicity bin combining the 2- and 3-jet categories. The typical \gls{auc} of these discriminants is $\sim0.84$, with no overtraining observed.
 
 \subsection{Output Variable Transformation}
-The \glspl{bdt} outputs from the previous section are a finely-binned \gls{mva} variables maximising the separation of signal from backgrounds. To optimise the sensitivity of the statistical analysis, the \gls{mva} distributions are rebinned such that low \gls{bdt} scores are still indicative of a background-like event and larger values are signal-like. This rebinning is performed with attention given the statistical uncertainty in each bin and the final sensitivity of the discriminant score. The analysis relies on the so-called \textit{Transformation D} algorithm. The technique relies on a per bin score $Z$ defined as
+The \glspl{bdt} outputs from the previous section are finely-binned \gls{mva} variables maximising the separation of signals from backgrounds. To optimise the sensitivity of the statistical analysis, the \gls{mva} distributions are rebinned such that low \gls{bdt} scores are still indicative of a background-like event and larger values are signal-like. This rebinning is performed with attention given to the statistical uncertainty in each bin and the final sensitivity of the discriminant score. The analysis relies on the so-called \textit{Transformation D} algorithm., defining a per-bin score $Z$ as
 \begin{equation}
     Z = z_s \frac{n_s}{N_s} + z_b \frac{n_b}{N_b},
 \end{equation} 
-where $N_s$ ($N_b$) is the total number of signal (background) events, $n_s$ ($n_b$) the number of signal (background) events in a specific bin, and $z_s$ and $z_b$ are tunable parameters indirectly controlling the number of signal and background bins desired in the region. For a given choice of $z_s$ and $z_b$, the algorithm starts from the initial binning of the \glspl{bdt} and successively recombines bins from the higher bin values (right) to the lower values (left). Successive bins of the original distribution are merged until the combined bin reaches a score $Z > 1$, thanks to increases in $n_s$ and $n_b$. Once a combined bin reaches the desired scores, it is removed from consideration and the algorithm starts again from the highest bin not yet recombined.\\
-
-\begin{comment}
-\begin{table}[h!]
-  \resizebox{\textwidth}{!}{
-  \begin{tabular}{c|c|c|c|c|c|c}
-    \hline\hline
-    %& $75 < p_T^V <150~\text{GeV}$ & $150 < p_T^V <250~\text{GeV}$ & $250 < p_T^V <400~\text{GeV}$ & $400 < p_T^V <600~\text{GeV}$ & \multicolumn{1}{c}{$p_T^V >600~\text{GeV}$}\\ \hline
-    \ptv\ & $[75, 150]$ GeV & $[150, 250]$ GeV & $[250, 400]$ GeV & $[400, 600]$ GeV & \multicolumn{1}{c}{$p_T^V >600~\text{GeV}$}\\ \hline
-    \vhb\ & \multicolumn{2}{c|}{$z_s = 10,\ z_b = 5$} & \multicolumn{2}{c|}{$z_s=5,\ z_b=3$} & \multicolumn{1}{c}{$\begin{cases} \text{0L/1L: } z_s = 3, z_b = 2 \\ \text{2L: }z_s = 2, z_b = 2\end{cases}$}\\\hline
-   \vhc\ & 
-   $\begin{cases} % 75-150
-      \text{$TT$: } z_s = 5, z_b = 3 \\
-      \text{Else: } z_s = 10,\ z_b = 5
-    \end{cases}$ & 
-    
-    $\begin{cases} % 150L250
-      \text{0L/1L} & \begin{cases} 
-                            \text{$TT$: } z_s = 5, z_b = 3 \\
-                            \text{Else: } z_s = 10,\ z_b = 5
-                          \end{cases}\\
-      \text{2L} & \begin{cases}
-                          \text{$TT$: } z_s = 2,\ z_b = 2\\
-                          \text{$LT$/$XT$: } z_s = 5,\ z_b = 5\\
-                          \text{Else: } z_s = 10,\ z_b = 5
-                        \end{cases}
-    \end{cases}$
-      & \multicolumn{3}{l}{
-        $\begin{cases} \text{$TT$: } z_s = 2, z_b = 2 \\ %250L400
-                        \text{$LT$/$XT$: } z_s = 5,\ z_b = 3 \\
-                        \text{Else: } z_s = 10,\ z_b = 5
-        \end{cases}$
-      }
-    \\\hline \hline
-  \end{tabular}
-  }
-  \caption{The optimised tune of the $z_s$ and $z_b$ parameter to rebin the MVAs with the \textit{Transformation D} algorithm in different phase spaces of the combined analysis.}
-  \label{tab:trafoDParams}
-\end{table}
-\end{comment}
-
-
+where $N_s$ ($N_b$) is the total number of signal (background) events, $n_s$ ($n_b$) the number of signal (background) events in a specific bin, and $z_s$ and $z_b$ are tunable parameters indirectly controlling the number of signal and background bins desired in the region. For a given choice of $z_s$ and $z_b$, the algorithm starts from the initial binning of the \glspl{bdt} and successively recombines bins from the higher bin values (right) to the lower values (left) of the distribution. Successive bins of the original distribution are merged until the combined bin reaches a score $Z > 1$, thanks to increases in $n_s$ and $n_b$. Once a combined bin reaches the desired scores, it is removed from consideration and the algorithm starts again from the highest bin not yet recombined.\\
 \begin{table}[h!]
   \resizebox{\textwidth}{!}{
   \begin{tabular}{c|c|c|c|c|c}
@@ -134,8 +96,9 @@ where $N_s$ ($N_b$) is the total number of signal (background) events, $n_s$ ($n
     \\\hline \hline
   \end{tabular}
   }
-  \caption{The optimised tune of the $z_s$ and $z_b$ parameter to rebin the MVAs with the \textit{Transformation D} algorithm in different phase spaces of the combined analysis.}
+  \caption{The optimised tune of the $z_s$ and $z_b$ parameter to rebin the MVAs with the \textit{Transformation D} algorithm in different regimes of the combined analysis.}
   \label{tab:trafoDParams}
 \end{table}
 
-The $z_s$ and $z_b$ parameters are manually tuned for each analysis regime and lepton channel, giving signal regions with a final number of \gls{bdt} bins varying from 4 to 15, as displayed in the postfit plots of Appendix \ref{appsec-vh-analRegPosfit}. An additional protection is added to avoid bins with too small data or \gls{mc} statistics, requiring at least 3 signal + background events per bin after transformation. The specific tunes of the parameters for the different regimes of the combined analysis are presented in Table~\ref{tab:trafoDParams}.
+The $z_s$ and $z_b$ parameters are tuned for each analysis regime and lepton channel, giving signal regions with a final number of \gls{bdt} bins varying from 4 to 15, as displayed in the postfit plots of Appendix \ref{appsec-vh-analRegPosfit}. An additional protection is added to avoid bins with too low data or \gls{mc} statistics, requiring at least 3 signal + background events per bin after transformation. The specific tunes for the different regimes of the combined analysis are presented in Table~\ref{tab:trafoDParams}.
+\newpage

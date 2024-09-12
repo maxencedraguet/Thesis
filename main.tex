@@ -30,8 +30,11 @@
 %{\color{white} \HRule } \\[0.4cm]
 \begin{center}
 \textsc{\huge \bfseries \color{white} advanced machine learning algorithms \\for heavy flavour jets identification}\\
-{\huge \bfseries \color{white} \&}\\
-\textsc{\huge \bfseries \color{white} study of the higgs boson couplings to the charm and beauty quarks with the atlas experiment}\\[1cm] 
+{\huge \bfseries \color{white} \&}\\ 
+\begin{minipage}{0.8\textwidth}
+    \centering
+    \textsc{\huge \bfseries \color{white} study of the higgs boson couplings to the charm and beauty quarks with the atlas experiment}\\[1cm] 
+\end{minipage}
 \end{center}
 %\textsc{\huge \bfseries \color{white} Advanced Machine Learning Applications for Higgs Searches and Heavy Flavour Quarks Identification at ATLAS}\\[0.4cm] 
 %{\color{white} \HRule \\ \HRule}\\[2cm]
@@ -52,7 +55,7 @@
 \begin{figure}[b]
 \centering
 %{\large \color{white} 2020-2024}\\[1cm]
-\textsc{\color{white} trinity \\MMXXIV}\\[1cm]
+\textsc{\color{white} michaelmas \\MMXXIV}\\[1cm]
 \includegraphics[scale=0.15]{Images/Oxford_Logo.png}
 \end{figure}
 \end{titlepage}
@@ -80,7 +83,8 @@
 {\pagestyle{plain}
 \pagenumbering{gobble}
 \input{Sections/C0_Abstract}
-\input{Sections/C0_Contributions.tex}
+\input{Sections/C0_Acknowledgments.tex}
+\input{Sections/C0_Contributions}
 }
 
 {
@@ -132,8 +136,8 @@
 
 {\pagestyle{plain}
 \begin{singlespace}
-%\setcounter{chapter}{8}
-%\ChapFrame
+\setcounter{chapter}{8}
+\ChapFrame
 \addcontentsline{toc}{chapter}{Bibliography}
 \printbibliography
 

@@ -14,10 +14,9 @@ The last machine in the complex multi-stage accelerator system of CERN depicted 
   \label{fig-CernAccSys}
 \end{figure}
 
-The operation of the \gls{lhc} is split into dedicated \textit{runs} of data-taking separated by \textit{shutdowns} to maintain or upgrade the infrastructure. Key metrics about these runs from the point of view of the ATLAS experiment are displayed in Table~\ref{tbl:LHCATLASperf}. Run 2 operated at a larger centre-of-mass energy ($\sqrt{s}$) and higher average instantaneous luminosity ($\mathcal{L}$) than Run 1, with the ongoing Run 3 yet again pushing up the limit.\\
+The operation of the \gls{lhc} is split into dedicated \textit{runs} of data-taking separated by \textit{shutdowns} to maintain or upgrade the infrastructure. Key metrics about these runs from the point of view of the ATLAS experiment are displayed in Table~\ref{tbl:LHCATLASperf}. Run 2 operated at a larger centre-of-mass energy ($\sqrt{s}$) and higher average instantaneous luminosity ($\mathcal{L}$) than Run 1.
 
-{
-\vspace{-1cm}
+%\vspace{-1cm}
 \begin{table}[!htbp]
   \begin{center}
       \renewcommand{\arraystretch}{1.2}
@@ -35,7 +34,6 @@ The operation of the \gls{lhc} is split into dedicated \textit{runs} of data-tak
     \label{tbl:LHCATLASperf}
   \end{center}
 \end{table}
-}
 
 The average instantaneous luminosity $\mathcal{L}$ measures the rate of data collection as
 \begin{equation}
@@ -175,7 +173,7 @@ If a reconstructed charged particle is produced in the hard scattering event, it
 In the ATLAS calorimeters, \textit{clusters} are identified by grouping cells with energy deposits matching specific criteria, using either the \textit{sliding window} or \textit{topocluster} algorithms \cite{Lampl:1099735}. The former generates fixed-size rectangular clusters by translating a window to maximize the transverse energy $E_T$ measured. The latter clusters neighbouring cells based on a signal-to-noise criterion. As the sliding window method is easier to calibrate, it is used in electron, photon, and hadronic-$\tau$ reconstruction. Topoclusters are robust against noise and are therefore used for jet and missing transverse energy reconstruction.
 
 \subsection{Electrons}\label{sec-atlas-el}
-Electrons leave signatures in the \gls{id} and the \gls{ecal}. In the central region $|\eta| < 2.5$, electrons are identified and reconstructed with both sub-detectors. The forward region $2.5 < |\eta| < 4.9$ is only covered by the calorimeters, and the shape of the shower is used to identify electrons. Here, only centrally produced \textit{prompt} electron reconstruction is described, where \textit{non-prompt} electrons are not produced from the main physics process but through subsequent decays or interactions with the detector itself. \\
+Electrons leave signatures in the \gls{id} and the \gls{ecal}. In the central region $|\eta| < 2.5$, electrons are identified and reconstructed with both subdetectors. The forward region $2.5 < |\eta| < 4.9$ is only covered by the calorimeters, and the shape of the shower is used to identify electrons. Here, only centrally produced \textit{prompt} electron reconstruction is described, where \textit{non-prompt} electrons are not produced from the main physics process but through subsequent decays or interactions with the detector itself. \\
 
 Since photons, pions, and jets can be mistaken for electrons, identification and isolation criteria must be implemented to provide high-purity electron candidates for analyses. The reconstruction relies on calorimeter clusters and track information. Tracks are matched to clusters with the expected energy loss taken into consideration. The track is extrapolated to ensure compatibility with the cluster barycenter, and the process is run again with more stringent conditions after refitting the matched tracks. A prompt electron is required to have a track matched to the \gls{pv}. The absence of precision hits or a matched track leads to considering the calorimeter clusters as a photon deposit. Photons can however be mistaken as electrons due to the photon-conversion process, where $\gamma \rightarrow e^+e^-$. Converted photons are allowed hits in the outer layers of the \gls{id}. \\
 

@@ -30,7 +30,8 @@
 \usepackage[bottom]{footmisc} % for bottom footnotes
 \usepackage{fullwidth}
 \usepackage{gensymb}
-\usepackage[left=3 cm, right=2 cm, top=2 cm, bottom=2 cm]{geometry}
+\usepackage[left=2.5 cm, right=2.5 cm, top=2 cm, bottom=2 cm]{geometry} % was 2 for right, 3 left
+%\usepackage[twoside]{geometry}
 \usepackage{hyperref}
   \usepackage{cleveref} % for footnote ref with hyperref 
 \usepackage{enumitem} % to remove the indend of itemize with [leftmargin=*]
@@ -53,6 +54,18 @@
 \usepackage{tcolorbox}  % for box summaries
 \usepackage{wrapfig, lipsum}
 \usepackage{xcolor}
+
+%\geometry{
+%    paper=a4paper, % or letterpaper
+%    %includeheadfoot,
+%    top=2cm,
+%    bottom=2cm,
+%    inner=3cm, % left margin for odd pages, right margin for even pages
+%    outer=2cm, % right margin for odd pages, left margin for even pages
+%    %headheight=14pt,
+%    %headsep=1.2cm,
+%    %footskip=1.2cm
+%}
 
 % Colours
 \definecolor{oxfordblue}{RGB}{0,32,68}
@@ -185,12 +198,12 @@
             inner sep=2pt,
             rectangle,
             text width=0.8cm,
-            text height=3cm,
+            text height=2.7cm, %3cm
             align=center,
             anchor=north east
           ] 
-          at ($ (current page.north east) + (-0cm,-3*\thechapshift cm) $) 
-          {\rotatebox{90}{\hspace*{1.35cm}\parbox[c][1.75cm][c]{3.cm}{%
+          at ($ (current page.north east) + (-0cm,-2.7*\thechapshift cm) $) 
+          {\rotatebox{90}{\hspace*{1.35cm}\parbox[c][1.75cm][c]{2.7cm}{% %3cm
               \raggedright\textcolor{white}{\scshape \vspace{0.9cm}\thechapter}}}};
         \end{tikzpicture}%
       }%
@@ -203,12 +216,12 @@
           inner sep=2pt,
           rectangle,
           text width=0.8cm,
-          text height=3cm,
+          text height=2.7cm, %3cm
           align=center,
-          anchor=north east
+          anchor=north west %east
         ] 
-        at ($ (current page.north east) + (-0cm,-3*\thechapshift cm) $) 
-        {\rotatebox{90}{\hspace*{1.35cm}\parbox[c][1.75cm][c]{3.cm}{%
+        at ($ (current page.north west) + (-0cm,-2.7*\thechapshift cm) $)  %east
+        {\rotatebox{90}{\hspace*{1.35cm}\parbox[c][1.75cm][c]{2.7cm}{% %3cm
             \raggedright\textcolor{white}{\scshape \vspace{0.9cm}\thechapter}}}};
         \end{tikzpicture}%
       }%

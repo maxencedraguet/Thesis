@@ -10,7 +10,7 @@
       \textbf{Settings} & 0L & 1L & 2L & 0L & 1L & 2L
       \\\hline
       Boost type 
-        & Gradient boost & Gradient boost & Gradient boost % VHbb Resolved 
+        & Gradient & Gradient & Gradient % VHbb Resolved 
         & Adaboost       & Adaboost       & Adaboost       % VHbb Boosted 
       \\\hline 
       Number of trees 
@@ -21,7 +21,7 @@
         & 3 & 4 & 4 % VHbb Resolved 
         & 3 & 3 & 3 % VHbb Boosted 
       \\\hline 
-      Learning rate ($\beta$) 
+      Learning rate 
         & 0.5 & 0.5 & 0.5% VHbb Resolved 
         & 0.5 & 0.35 & 0.3 % VHbb Boosted 
       \\\hline 
@@ -50,10 +50,10 @@
     \begin{tabular}{c|cc|c}
       \multicolumn{1}{c}{} & \multicolumn{2}{c|}{\vhc} &  $VZ{\rightarrow c\bar{c}}$ 
       \\\hline \hline
-      \textbf{Settings} & 0L, 1L \& most 2L regions & 2- \& $\geq$3-jet, low \ptv\ & 0L, 1L, 2L
+      \textbf{Settings} & 0L, 1L \& most 2L regions & 2L low \ptv\ & 0L, 1L, 2L
       \\\hline
       Boost type 
-        & Gradient boost & Adaboost % VHcc
+        & Gradient & Adaboost % VHcc
         & Adaboost                  % VZcc
       \\\hline 
       Number of trees 
@@ -64,7 +64,7 @@
         & 4 & 4     % VHcc
         & 4         % VZcc
       \\\hline 
-      Learning rate ($\beta$) 
+      Learning rate 
         & 0.5 & 0.15 % VHcc
         & 0.15       % VZcc 
       \\\hline 
@@ -79,6 +79,6 @@
     \end{tabular}
   %}
   \caption{
-    Hyperparameters of the BDTs per lepton channel of \vhc. The 2L low \ptv\ region mentioned covers 75 GeV $<$ pTV $<$ 150 GeV. All models used the Gini index as separation method, without pruning.}
+    Hyperparameters of the BDTs per lepton channel of \vhc. The 2L low \ptv\ region mentioned covers 75 GeV $<$ pTV $<$ 150 GeV for the 2- \& $\geq$3-jet multiplicities. All models used the Gini index as separation method, without pruning.}
   \label{tbl:MVAHyperparams-VHcc}
 \end{table}

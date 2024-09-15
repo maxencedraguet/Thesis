@@ -53,6 +53,7 @@
 \usepackage{titlesec}
 \usepackage{tcolorbox}  % for box summaries
 \usepackage{wrapfig, lipsum}
+\usepackage{floatflt} % testing for fix wrapfigure
 \usepackage{xcolor}
 
 %\geometry{
@@ -157,8 +158,10 @@
 \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
 \renewcommand{\headrulewidth}{0pt}
 \fancyhf{}
-\fancyhead[L]{\small \color{oxfordblue} \textbf{\textit{\textsc{Chapter \thechapter: \leftmark}}}}
-\fancyhead[R]{\small \color{oxfordblue} \textbf{\textit{University of Oxford}}}
+%\fancyhead[L]{\small \color{oxfordblue} \textbf{\textit{\textsc{Chapter \thechapter: \leftmark}}}}
+%\fancyhead[R]{\small \color{oxfordblue} \textbf{\textit{University of Oxford}}}
+\fancyhead[L]{\small \color{oxfordblue} \textit{Chapter \thechapter: \leftmark}}
+\fancyhead[R]{\small \color{oxfordblue} \textit{University of Oxford}}
 \lfoot{}
 \cfoot{\thepage}
 \interfootnotelinepenalty=10000

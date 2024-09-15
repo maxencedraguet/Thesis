@@ -3,7 +3,7 @@
 
 \textit{This Appendix presents additional details and pseudocode for selected algorithms presented in Chapter \ref{Chap-ML}.}
 
-\section{Decision Trees and their extensions}
+\section{Decision Trees, AdaBoost, and Gradient Boosting}
 \addtocontents{toc}{\protect\setcounter{tocdepth}{1}}
 \subsection{Decision Trees}\label{app:dtalgo}
 Algorithm \ref{ag:DT} presents a recursive procedure to train a decision tree. 
@@ -61,7 +61,7 @@ Algorithm \ref{algo:gradient_boosting} presents the gradient boosting algorithm.
 
 \section{Artificial Neural Networks}\label{app:dnn_uni_approx}
 \addtocontents{toc}{\protect\setcounter{tocdepth}{1}}
-\subsection{Universal Function Approximator Theorem}
+\subsection{Universal Approximation Theorems}
 A family of theorems establish \glspl{dnn} as Universal Function Approximators. The most famous such theorem states \cite{universalFuncApproxNN,HORNIK1989359}:
 
 \paragraph{Theorem:} \textit{Let $C([0, 1]^n)$ denote the set of all continuous functions $[0, 1]^n \rightarrow \mathbb{R}$ and $\sigma$ be any sigmoidal activation function. Then the finite sum $\hat{f}(x) = \sum_{i=1}^N \alpha_i \sigma(w_i^T x + b_i)$ is dense in $C([0, 1]^n)$. In other words, given any $f \in C([0, 1]^n)$ and $\epsilon > 0$, there is a sum $\hat{f}(x)$ of the above form for which \[ f(x) - \hat{f}(x)| < \epsilon \quad \forall x \in [0, 1]^n.\]}

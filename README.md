@@ -3,7 +3,7 @@
 This repository contains the ongoing work on writing my thesis. 
 Currently at the first draft stage!
 
-The full pdf is available [here](https://github.com/maxencedraguet/Thesis/blob/main/main.pdf). 
+The full pdf is available [here](https://github.com/maxencedraguet/Thesis/blob/main/Draguet_Thesis.pdf).
 It should be downloaded as it is too large for the viewer. 
 
 Notice:
